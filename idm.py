@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+#
+# Install Drupal Module (idm)
+# Author : Jonas Björk, jonas@jonasbjork.net
+# Date   : 2009-10-22
+# License: EUPL v1.1 (http://ec.europa.eu/idabc/eupl)
+# 
 import sys
 from ftplib import FTP
 
