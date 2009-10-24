@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #
 # Install Drupal Module (idm)
 # Author : Jonas Björk, jonas@jonasbjork.net
