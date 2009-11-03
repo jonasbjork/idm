@@ -12,8 +12,14 @@
 import sys,re,string
 #from sys import argv
 from optparse import OptionParser #For parsing command line arguments.
-
 from ftplib import FTP
+
+try:
+  import sqlite3 as sqlite
+  has_sql = True
+except ImportError:
+  has_sql = False
+  print "Could not find SQLite"
 
 # function to print usage of this command
 def usage():
@@ -40,6 +46,15 @@ if len(args) < 1:
   usage()
   sys.exit(0)
 
+# SQLite stuff
+# initialize the database
+if has_sql:
+  conn = sqlite.connect("idm.db")
+  cur = conn.cursor()
+  conn.execute("CREATE TABLE IF NOT EXISTS info(last_seen int)")
+  #TODO: create the table with fileinfo
+
+# TODO: This should be fixed! We cant rely on a single server, mirrors maybe? :)
 module = args[0]
 server = 'ftp.drupal.org'
 path = '/pub/drupal/files/projects/'
@@ -60,6 +75,7 @@ fdir = ftp.nlst()
 if options.verbose:
   print 'Found a total of ' + str(len(fdir)) + ' files!'
 
+# TODO pupulate the db-table
 
 l = [f for f in fdir if module in f]
 l2 = [] #This is the filtered list.
