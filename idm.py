@@ -10,10 +10,16 @@
 # Also added a better help :) 
 
 import sys,re,string
+#from sys import argv
 from optparse import OptionParser #For parsing command line arguments.
 
 from ftplib import FTP
 
+# function to print usage of this command
+def usage():
+  print "Usage: " + sys.argv[0] + " <commands> [module]"
+
+# TODO: This optionparser makes usage-information inconsistent
 optParser = OptionParser()
 optParser.set_defaults(drupalfilter="all")
 optParser.set_defaults(verbose=True)
@@ -31,7 +37,7 @@ optParser.add_option("-q", "--quiet", action="store_false", dest="verbose", help
 #drupal filter is in options.drupalfilter
 
 if len(args) < 1:
-  print "Usage: ./idm.py <commands> [module]"
+  usage()
   sys.exit(0)
 
 module = args[0]
@@ -100,4 +106,4 @@ for x in id_array:
   
 ftp.close()
 if options.verbose:
-  print "Download complete. Cloing…"
+  print "Download complete. Closing…"
